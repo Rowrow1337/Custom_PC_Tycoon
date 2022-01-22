@@ -1,0 +1,26 @@
+getgenv().Break = false
+
+while true do
+    task.wait()
+    if getgenv().Break then
+        break
+    end
+    local timer = tick()
+    loadstring(game:HttpGet('https://github.com/Rowrow1337/Custom_PC_Tycoon/raw/main/buy.lua'))()
+    warn("Took "..tick() - timer.." seconds for buy.lua")
+    wait(1)
+    local timer = tick()
+    loadstring(game:HttpGet('https://github.com/Rowrow1337/Custom_PC_Tycoon/raw/main/build.lua'))()
+    warn("Tick "..tick() - timer.." seconds for build.lua")
+    local args = {
+        [1] = "nil"
+    }
+    
+    game:GetService("ReplicatedStorage").Resources.Remotes.RemoteEvents.Save:FireServer(unpack(args))
+    task.wait(1)
+    local args = {
+        [1] = "nil"
+    }
+    
+    game:GetService("ReplicatedStorage").Resources.Remotes.RemoteEvents.Sell:FireServer(unpack(args))
+end
